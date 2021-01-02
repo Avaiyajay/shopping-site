@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-10 border p-3" style="border-radius: 20px;">
+          <form method="POST">
+              {% csrf_token %}
+              <div class="myrow">
+                  <div class="col-50">
+                    <h3 class="text-center mb-4">Are You Sure You Want To Delete This Address</h3>
+                    <div class="col-5 p-3">
+                        <div class="jumbotron">
+                            <address class="lead">
+                                {{object.fullname}}.<br>
+                                {{object.address}}<br>
+                                {{object.zipcode}}<br>
+                                {{object.city}},{{object.state}}<br>
+                            </address>
+                        </div>
+                   </div>
+                  </div>
+              </div>
+                <button type="submit" class="btn btn-danger text-capitalize" style="width: 100%;">Delete</button>                        
+          </form>
+      </div>
+    </div>
+</div>
+{% endblock %}

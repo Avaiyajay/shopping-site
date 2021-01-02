@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="maincontainer">
+            <div class="row loginformrow">
+                <div class="col-12">
+                    <div class="jumbotron">
+                        <a href="{% url 'homepage' %}"><button class="btn btn-primary mb-5">Back</button></a>
+                        {% for message in messages %}
+                            <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                              <strong>{{message}}</strong>
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                        {% endfor %}
+                        <form method="post">
+                            {%  csrf_token %}
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Username</label>
+                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="username" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Password</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1" name="password" required>
+                                <small class="text-capitalize"><a href="{% url 'password_reset' %}" class="link-to-signup">forgot password</a></small>
+                            </div>
+                            <center><button type="submit" class="btn btn-primary">Submit</button></center>
+                            <center class="mt-3"><h6 class="text-capitalize">if you don't have account? <a href="{% url 'signup' %}" class="link-to-signup">sign up</a></h6></center>
+                        </form>
+                </div>
+            </div>
+        </div>
+{% endblock %}

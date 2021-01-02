@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %} 
+    
+    <div class="container-fluid cart-container">
+            <div class="row cart-container-row justify-content-center">
+                <div class="col col-10 mt-5">
+                    <a href="{% url 'homepage' %}"><button class="btn btn-primary mb-5 text-capitalize"><--  continue shopping</button></a>
+                </div>
+            </div>
+            <div class="row cart-container-row justify-content-center mb-5">
+                <div class="col col-10 cart-title">
+                    <div>
+                        <h1>Cart</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row cart-container-row p-1 justify-content-center">
+                <div class="col col-md-4 border text-capitalize text-center">items</div>
+                <div class="col col-md-2 border text-capitalize text-center">quentity</div>
+                <div class="col col-md-2 border text-capitalize text-center">price</div>
+                <div class="col col-md-2 border text-capitalize text-center">total</div>
+            </div>
+            <!-- cart-section -->
+                   {% for object in objects %}
+                    <div class="row cart-container-row p-1 one-product justify-content-center">
+                        <div class="col col-md-4 border">
+                            <div class="product-img p-lg-5 p-xl-5 p-sm-2 pt-3 ">
+                                <img src="{{ object.product.ImageUrl }}" class="img-fluid" alt="">
+                            </div>
+                        </div>
+                        <div class="col col-md-2 border quantity">
+                            <div class="product-quantity">
+                                <span class="quantity">{{ object.quantity }}</span>
+                            </div>
+                            <div class="manage-quantity">
+                                <a data-productid="{{object.product.id}}" data-action="add" class="update-cart">
+                                 <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-caret-up-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                                 </svg>
+                                </a>
+                                <br>
+                                <a data-productid="{{object.product.id}}" data-action="remove" class="update-cart">
+                                    <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                         <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col col-md-2 border quantity">
+                            <div class="product-price">
+                                <span class="price">{{object.product.price}}</span>
+                            </div>
+                        </div>
+                        <div class="col col-md-2 border quantity">
+                            <div>
+                                <span class="price">{{object.get_per_product_total}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+
+
+            <br><br>
+            <div class="row cart-container-row border"></div>
+
+            <!-- total-price-section -->
+            <div class="row cart-container-row p-1 justify-content-center">
+                <div class="col col-8">
+                    <span class="price total-text">total  price  is : </span>
+                </div>
+                <div class="col col-2 quantity">
+                    <span class="price">{{order.get_total_order_price}}</span>
+                </div>
+            </div>
+            <div class="row cart-container-row border mb-3"></div>
+
+
+            <div class="row cart-container-row p-3 justify-content-center">
+                <div class="col col-2 offset-8 quality">
+                    <a href="{% url 'checkoutpage' %}"><button class="btn btn-primary text-capitalize">checkout ---> </button></a>
+                </div>
+            </div>
+
+            <div class="row cart-container-row border mt-3"></div>
+    </div>
+
+{% endblock %}

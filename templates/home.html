@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container-fluid homepage-container">
+           <div class="row justify-content-center mt-5 ">
+               <div class="col-4">
+                   <h1 class="text-capitalize text-center category-name">shoes</h1>
+               </div>
+           </div>
+
+
+           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4 p-5">
+               {% for product in obj %}
+               <div class="col mb-4">
+                    <div class="card">
+                        <img src="{{ product.image.url }}" class="card-img-top img-fluid" alt="...">
+                        <div class="card-body">
+                            <span class="card-title">{{product.name}}</span>
+                            <span style="float: right;">{{product.price}}</span>
+                            <hr>
+                            <button data-productid = "{{product.id}}" data-action="add" class="btn btn-outline-primary update-cart" >Add to Cart</button>
+                            <a href="#" class="btn btn-outline-warning">View</a>
+                        </div>
+                    </div>
+               </div>
+               {% endfor %}
+            </div>
+    </div>
+{% endblock %}
